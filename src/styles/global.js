@@ -7,7 +7,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
-  root: {
+  :root {
     font-size: 62.5%;
   }
 
@@ -15,7 +15,7 @@ export default createGlobalStyle`
     font-family: Roboto, sans-serif;
     font-size: 1.6rem;
     background: ${({ theme }) => theme.DARK.D400};
-    color: ${({ theme }) => theme.LIGHT.L100};
+    color: ${({ theme }) => theme.LIGHT.L300};
   }
 
   body, button, input, textarea {

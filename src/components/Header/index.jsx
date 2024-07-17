@@ -5,6 +5,7 @@ import { Container, Menu } from './styles'
 import { Logo } from '../../components/Logo'
 import { Input } from '../../components/Input'
 import { ButtonText } from '../../components/ButtonText'
+import { Footer } from '../Footer'
 
 export function Header(){
   const [open, setOpen] = useState(false);
@@ -14,7 +15,7 @@ export function Header(){
   };
   return(
     <Container>
-      <Menu data-openMenu={open}>
+      <Menu data-open-menu={open}>
         <header>
           <FiX 
             onClick={handleMenuToggle}
@@ -32,6 +33,8 @@ export function Header(){
             onClick={handleMenuToggle}
           />
         </div>
+
+        <Footer />
       </Menu>
       <FiMenu
         className='menu-icon'

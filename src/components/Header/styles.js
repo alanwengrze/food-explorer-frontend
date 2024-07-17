@@ -20,7 +20,6 @@ export const Container = styled.div`
     }
   }
 
-  
    
   svg {
     font-size: 2.5rem;
@@ -51,6 +50,7 @@ export const Menu = styled.div`
   background-color: ${({ theme }) => theme.DARK.D400};
   font-weight: 300;
   .search-wrapper{
+    grid-area: content;
     padding: 2rem;
 
     > button {
@@ -65,6 +65,8 @@ export const Menu = styled.div`
   }
 
   > header {
+    grid-area: header;
+
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -79,7 +81,12 @@ export const Menu = styled.div`
     }
   }
 
-  &[data-openMenu="true"] {
-    display: block;
+  &[data-open-menu="true"] {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas: 
+      "header"
+      "content"
+      "footer";
   }
 `
