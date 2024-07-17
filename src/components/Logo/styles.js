@@ -6,7 +6,7 @@ export const Container = styled.div`
   gap: 0.7rem;
 
   h1{
-    font-size: 1.6rem;
+    font-size: 3.2rem;
   }
 
   img{

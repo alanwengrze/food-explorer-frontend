@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.header`
-   display: grid;
+  height: 100vh;
+  display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-areas: 
       "header"
@@ -10,6 +11,7 @@ export const Container = styled.header`
 
   > main {
     grid-area: content;
+    overflow-y: hidden;
     padding: 2rem;
   }
 `;
@@ -18,6 +20,7 @@ export const Banner = styled.div`
   display: flex;
   align-items: center;
   background-color: ${({ theme }) => theme.DARK.D700};
+  margin-bottom: 5rem;
   .img-wrapper{
     width: 100%;
     height: 10rem;
@@ -156,3 +159,4 @@ export const Banner = styled.div`
   }
 
 `;
+

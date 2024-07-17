@@ -11,31 +11,23 @@ export const Container = styled.div`
   background-color: ${({ theme }) => theme.DARK.D700};
 
   > div{
-    gap: 0;
+    gap: 0.5rem;
     img {
-      height: 2rem;
+      height: 2.4rem;
     }
     h1{
-      font-size: 1.2rem;
+      font-size: 2.4rem;
     }
   }
 
-   
   svg {
-    font-size: 2.5rem;
+    font-size: 2.4rem;
   }
 
   @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {
     .menu-icon{
       display: none;
     }
-    > div {
-        gap: 0.5rem;
-
-        h1{
-          font-size: 1.5rem;
-        }
-      }
   }
 `;
 
