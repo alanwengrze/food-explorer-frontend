@@ -2,12 +2,11 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   position: relative;
-  max-width: 20rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  padding: 2rem;
+  gap: 1.5rem;
+  padding: 3rem;
   border-radius: 0.8rem;
   background-color: ${({ theme }) => theme.DARK.D200};
 
@@ -17,6 +16,8 @@ export const Container = styled.div`
     right: 1rem;
     font-size: 1.8rem;
 
+    transition: 0.4s;
+
     &:hover {
       cursor: pointer;
       color: ${({ theme }) => theme.COLORS.CAKE_100};
@@ -24,16 +25,80 @@ export const Container = styled.div`
     }
   }
 
+ 
+  > img {
+    width: 9rem;
+    height: 9rem;
+  }
+
   > span{
     font-size: 1.4rem;
   }
   
   > p {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     color: ${({ theme }) => theme.COLORS.CAKE_200};
   }
-  > img {
-    width: 9rem;
-    height: 9rem;
+
+  .add-wrapper {
+    width: 100%;
+  }
+  .add-wrapper > button:last-child {
+    margin-top: 1.5rem;
+    width: 14rem;
+  }
+
+  @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {
+
+    img{
+      width: 12rem;
+      height: 12rem;
+    }
+    
+    > span{
+    font-size: 1.6rem;
+    }
+  
+    > p {
+      font-size: 1.8rem;
+      color: ${({ theme }) => theme.COLORS.CAKE_200};
+      }
+
+  }
+
+  @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+    img{
+      width: 15rem;
+      height: 15rem;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.SCREENS.LG}) {
+
+    img{
+      width: 20rem;
+      height: 20rem;
+    }
+
+    > span{
+    font-size: 2.2rem;
+    }
+  
+    > p {
+      font-size: 2.4rem;
+      color: ${({ theme }) => theme.COLORS.CAKE_200};
+      }
+
+      .add-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        > button:last-child {
+          margin:0;
+          width: 8rem;
+          height: 4rem;
+        }
+      }
   }
 `

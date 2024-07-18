@@ -11,8 +11,13 @@ export const Container = styled.header`
 
   > main {
     grid-area: content;
-    overflow-y: hidden;
+    overflow-y: scroll;
     padding: 2rem;
+  }
+
+  .category-wrapper{
+    background-color: ${({ theme }) => theme.GRADIENTS.G100};
+
   }
 `;
 

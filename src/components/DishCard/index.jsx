@@ -4,7 +4,7 @@ import { AddDishes } from "../AddDishes";
 import { Button } from "../Button";
 import { FiHeart, FiEdit2 } from 'react-icons/fi'
 
-export function DishCard({ name, image, price, isAdmin = false, ...rest }) {
+export function DishCard({ name, image, description, price, isAdmin = false, ...rest }) {
   const [dishesCount, setDishesCount] = useState(0)
 
   const handleAddDishes = () => {
@@ -14,17 +14,22 @@ export function DishCard({ name, image, price, isAdmin = false, ...rest }) {
     setDishesCount(prevState => prevState - 1);
   }
   return (
-    <Container {...rest}>
-      { isAdmin ? <FiHeart /> : <FiEdit2 /> }
+    <Container {...rest} data-desktop={false}>
+      { isAdmin ? <FiEdit2 /> : <FiHeart /> }
       <img src={image} alt={name} />
       <span>{name}</span>
       <p>{price}</p>
-      <AddDishes 
-        dishCount={dishesCount}
-        handleAdd={handleAddDishes}
-        handleRemove={handleRemoveDishes}
-      />
-      <Button title="incluir"/>
+     {
+      !isAdmin && 
+        <div className="add-wrapper">
+          <AddDishes 
+            dishCount={dishesCount}
+            handleAdd={handleAddDishes}
+            handleRemove={handleRemoveDishes}
+          />
+          <Button title="incluir"/>
+        </div>
+     }
     </Container>
   )
 }

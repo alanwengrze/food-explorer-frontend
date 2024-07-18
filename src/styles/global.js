@@ -19,7 +19,7 @@ export default createGlobalStyle`
   }
 
   body, button, input, textarea {
-    font-size: 1rem;
+    font-size: 1.4rem;
   }
 
   button, input, textarea {

@@ -8,4 +8,12 @@ export const Container = styled.div`
   span{
     font-size: 1.8rem;
   }
+
+  button {
+    transition: 0.4s;
+
+    &:hover{
+    color: ${({ theme }) => theme.COLORS.TOMATO_100};
+    }
+  }
 `;

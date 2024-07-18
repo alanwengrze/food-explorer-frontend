@@ -7,14 +7,14 @@ import { Input } from '../../components/Input'
 import { ButtonText } from '../../components/ButtonText'
 import { Footer } from '../Footer'
 
-export function Header(){
+export function Header({isAdmin = false}){
   const [open, setOpen] = useState(false);
 
   const handleMenuToggle = () => {
     setOpen(!open);
   };
   return(
-    <Container>
+    <Container $isadmin={isAdmin}>
       <Menu data-open-menu={open}>
         <header>
           <FiX 
@@ -28,6 +28,13 @@ export function Header(){
             placeholder='Busque por pratos ou ingredientes'
           />
 
+          {
+            isAdmin && 
+            <ButtonText
+              title='Novo prato'
+              onClick={handleMenuToggle}
+            />
+          }
           <ButtonText
             title='Sair'
             onClick={handleMenuToggle}
@@ -41,7 +48,9 @@ export function Header(){
         onClick={handleMenuToggle}
       />
       <Logo />
-      <PiReceipt />
+      {
+        isAdmin && <PiReceipt />
+      }
     </Container>
   )
 }

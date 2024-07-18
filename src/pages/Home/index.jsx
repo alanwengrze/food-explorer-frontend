@@ -5,13 +5,20 @@ import { DishCard } from '../../components/DishCard'
 import { Category } from '../../components/Category'
 import bannerImg from '../../assets/bannerImg.png'
 
-const dish = {
+export const dish = {
   name: 'Salada Bacon',
-  role: 'ADMIN',
+  role: true,
   image: '/src/assets/bacon.png',
-  price: 'R$ 29,90'
+  price: 'R$ 29,90',
+  description: 'Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.',
+  ingredients: [
+    "1 lata de leite",
+    "1 lata de creme de leite",
+    "bacon",
+    "alface",
+  ]
 }
-export function Home({title}){
+export function Home({isAdmin = false}){
   return(
     <Container>
       <Header />
@@ -26,26 +33,54 @@ export function Home({title}){
             </div>
           </Banner>
 
-          <Category title='Refeição'>
-            <DishCard 
-              name={dish.name}
-              image={dish.image}
-              price={dish.price}
-              isAdmin
-            />
-            <DishCard 
-              name={dish.name}
-              image={dish.image}
-              price={dish.price}
-              isAdmin
-            />
-            <DishCard 
-              name={dish.name}
-              image={dish.image}
-              price={dish.price}
-              isAdmin
-            />
-          </Category>
+          <div className="category-wrapper">
+            <Category title='Refeições'>
+              <DishCard
+                name={dish.name}
+                image={dish.image}
+                price={dish.price}
+                isAdmin={dish.role}
+              />
+               <DishCard
+                name={dish.name}
+                image={dish.image}
+                price={dish.price}
+                isAdmin={dish.role}
+              />
+              <DishCard
+                name={dish.name}
+                image={dish.image}
+                price={dish.price}
+                isAdmin={dish.role}
+              />
+              <DishCard
+                name={dish.name}
+                image={dish.image}
+                price={dish.price}
+                isAdmin={dish.role}
+              />
+            </Category>
+            <Category title='Sobremesas'>
+              <DishCard
+                name={dish.name}
+                image={dish.image}
+                price={dish.price}
+                isAdmin={dish.role}
+              />
+              <DishCard
+                name={dish.name}
+                image={dish.image}
+                price={dish.price}
+                isAdmin={dish.role}
+              />
+              <DishCard
+                name={dish.name}
+                image={dish.image}
+                price={dish.price}
+                isAdmin={dish.role}
+              />
+            </Category>
+          </div>
         </main>
       <Footer />
     </Container>

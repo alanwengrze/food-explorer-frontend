@@ -13,4 +13,9 @@ export const Container = styled.div`
     height: 2.5rem;
     width: 2.5rem;
   }
+
+  span{
+    font-size: 1.6rem;
+    color: ${({ theme }) => theme.COLORS.CAKE_200};
+  }
 `;

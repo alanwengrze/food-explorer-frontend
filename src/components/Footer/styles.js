@@ -30,6 +30,11 @@ export const Container = styled.footer`
   }
 
   @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {
-    flex-direction: row;
+    span{
+      font-size: 1.2rem;
+    }
+    > div h1{
+      font-size: 1.8rem;
+    }
   }
 `;

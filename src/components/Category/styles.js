@@ -2,13 +2,13 @@ import styled from "styled-components";
 
 export const Container = styled.div`
  h2{
-  margin-bottom: 1rem;
+  margin-block: 3rem;
   font-size: 2.4rem;
  }
 `
 
 export const Carrousel = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  overflow-x: auto;
   gap: 2rem;
 `
