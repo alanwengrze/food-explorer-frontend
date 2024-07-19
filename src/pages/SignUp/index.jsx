@@ -19,6 +19,7 @@ export function SignUp() {
     <Container>
       <Logo />
       <Form>
+        <h1>Crie sua conta</h1>
       <InputWrapper>
           <Label title="Seu nome"/>
           <Input type="email" placeholder="Exemplo: Maria da Silva" />
@@ -34,11 +35,13 @@ export function SignUp() {
           <Input type="email" placeholder="No minimo 6 caracteres" />
         </InputWrapper>
         <Button title="Criar conta"/>
-      </Form>
-      <ButtonText 
+
+        <ButtonText 
         title="Já tenho uma conta"
         onClick={handleBack}
       />
+      </Form>
+     
     </Container>
   )
 }

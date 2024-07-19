@@ -24,6 +24,7 @@ export function EditDish() {
         />
         <h2>Editar prato</h2>
         <Form>
+          <div className="input-wrapper">
           <InputWrapper>
             <Label title="Imagem do prato"/>
             <Input 
@@ -44,13 +45,17 @@ export function EditDish() {
               <option value="bebida">Bebidas</option>
             </select>
           </InputWrapper>
+          </div>
+          <div className="input-wrapper ing">
           <InputWrapper>
             <Label title="Ingredientes"/>
             <div className="ingredients">
+              <div className="test">
               <DishItem 
                 placeholder="Ex: Picanha"
                 isNew
               />
+              </div>
               <DishItem 
                 placeholder="Ex: Picanha"
                 isNew
@@ -60,13 +65,16 @@ export function EditDish() {
               />
             </div>
           </InputWrapper>
-          <InputWrapper>
-            <Label title="Preço"/>
-            <Input 
-              type="number" 
-              placeholder="R$ 00,00"
-            />
-          </InputWrapper>
+          <div className="price">
+            <InputWrapper>
+              <Label title="Preço"/>
+              <Input
+                type="number" 
+                placeholder="R$ 00,00"
+              />
+            </InputWrapper>
+          </div>
+          </div>
           <InputWrapper>
             <Label title="Descrição"/>
             <Textarea />

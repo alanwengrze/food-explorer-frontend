@@ -10,27 +10,65 @@ export const Container = styled.div`
       "footer";
   
   > main {
-    position: relative;
     grid-area: content;
     overflow-y: scroll;
-    padding: 4rem;
+    padding: 2rem;
+    align-items: center;
+    gap: 2.5rem;
+    margin-top: 2rem;
+
+    > button:first-child{
+      font-size:2.4rem;
+      margin-bottom: 4rem;
+      display: flex;
+      align-items: center;
+
+      svg{
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+      padding: 2rem 10rem;
+    }
+
+  }
+`;
+
+export const Dish = styled.div`
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+
+  .img-wrapper{
+    img {
+      width: 24rem;
+      height: 24rem;
+    }
+  }
+
+  .details-wrapper{
+    width: fit-content;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
-    margin-top: 4rem;
+    justify-content: center;
+    gap: 2.4rem;
 
-    > button:first-child{
-      position: absolute;
-      top: 0;
-      left: 20%;
-      font-size:2.4rem;
-
-      display: flex;
-      align-items: center;
+    h2{
+      font-size: 2.4rem;
+      font-weight: 400;
     }
 
-    .ingredients {
+    p{
+      line-height: 2.4rem;
+    }
+  }
+
+  .ingredients {
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
@@ -49,5 +87,80 @@ export const Container = styled.div`
     }
   }
 
+  @media (min-width: ${({ theme }) => theme.SCREENS.SM}){
+    .edit-button{
+      width: auto;
+      padding: 2rem;
+    }
   }
-`
+
+
+  @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+
+   .img-wrapper {
+
+    img{
+      width: 30rem;
+      height: 30rem;
+    }
+   }
+
+    .details-wrapper{
+      align-items: flex-start;
+
+      h2{
+        font-size: 2.8rem;
+        font-weight: 500;
+      }
+
+      p{
+        font-size: 1.4rem;
+        line-height: 2.6rem;
+      }
+
+      .add-wrapper {
+        button:last-child{
+          
+          width: auto;
+          padding: 2rem ;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.SCREENS.LG}) {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+
+   .img-wrapper {
+
+    img{
+      width: 39rem;
+      height: 39rem;
+    }
+   }
+
+    .details-wrapper{
+      align-items: flex-start;
+
+      p{
+        font-size: 2rem;
+        line-height: 3rem;
+      }
+
+      
+      .add-wrapper {
+        button {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+`;

@@ -6,10 +6,10 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.DARK.D800};
-  border-radius: 0.4rem;
+  border-radius: 0.5rem;
 
   > input {
-    height: 2.5rem;
+    height: 4.5rem;
     width: 100%;
     padding: 1.6rem;
     color: ${({ theme }) => theme.LIGHT.L100};

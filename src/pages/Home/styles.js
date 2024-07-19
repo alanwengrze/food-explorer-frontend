@@ -13,154 +13,136 @@ export const Container = styled.header`
     grid-area: content;
     overflow-y: scroll;
     padding: 2rem;
+
+    @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+      padding: 2rem 10rem;
+    }
   }
 
   .category-wrapper{
-    background-color: ${({ theme }) => theme.GRADIENTS.G100};
-
+    background-image: ${({ theme }) => theme.GRADIENTS.G100};
   }
 `;
 
 export const Banner = styled.div`
+  height: 13rem;
   display: flex;
   align-items: center;
-  background-color: ${({ theme }) => theme.DARK.D700};
-  margin-bottom: 5rem;
+  justify-content: space-between;
+  background-image: ${({ theme }) => theme.GRADIENTS.G200};
+  border-radius: 0.8rem;
+  margin-block: 4rem;
+  position: relative;
+
   .img-wrapper{
     width: 100%;
-    height: 10rem;
-    position: relative;
+    
     img{
       position: absolute;
-      width: 14rem;
-      height: 10rem;
-      top: 0;
-      left: -15px;
+      object-fit: cover;
+      object-position: top;
+      width: 17rem;
+      height: 15rem;
+      top: -20px;
+      left: -20px;
     }
   }
   
   .text-wrapper{
-    margin-right: 1rem;
     h2{
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       margin-bottom: 1rem;
     }
     p{
-      font-size: 1rem;
+      font-size: 0.8rem;
       font-weight: 300;
     }
   } 
 
   @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {
-    justify-content: space-between;
-    margin-inline: 2rem;
-    .img-wrapper{
-      width: auto;
-      height: 22rem;
-      position: relative;
 
+    .img-wrapper{
       img{
-        position: absolute;
-        width: 28rem;
-        height: 22rem;
-        top: 0;
-        left: -30px;
+        width: 20rem;
       }
     }
 
     .text-wrapper{
+      margin-right: 2rem;
+
       h2{
-        font-size: 2.2rem;
-      }
-      p{
-        font-size: 1rem;
-        font-weight: 300;
-      }
-    } 
-  }
-
-  @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
-    justify-content: space-between;
-
-    .img-wrapper{
-      width: auto;
-      height: 25rem;
-      position: relative;
-
-      img{
-        position: absolute;
-        width: 36rem;
-        height:25rem;
-        top: 0;
-        left: -40px;
-      }
-    }
-
-    .text-wrapper{
-      h2{
-        font-size: 3.2rem;
-        
+        font-size: 1.8rem;
+        line-height: 2.4rem;
       }
       p{
         font-size: 1.4rem;
-        font-weight: 300;
-        line-height: 1rem;
       }
-    } 
-  };
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+
+    .text-wrapper{
+
+      h2{
+        font-size: 2.4rem;
+      }
+
+      p{
+        font-size: 1.6rem;
+      }
+    }
+  }
 
   @media (min-width: ${({ theme }) => theme.SCREENS.LG}) {
-    .img-wrapper{
-      width: auto;
-      height: 32rem;
-      position: relative;
 
-      img{
-        position: absolute;
-        width: 44rem;
-        height:32rem;
-        top: 0;
-        left: -40px;
+    height: 26rem;
+    margin: 12rem 0 4rem 0;
+
+    .text-wrapper{
+      
+      h2{
+        font-size: 3.2rem;
+        font-family: Poppins;
+        font-weight: 500;
+        line-height: 5rem;
+      }
+      p{
+        font-size: 1.4rem;
+
+        white-space: nowrap;
       }
     }
 
-    .text-wrapper{
-      h2{
-        font-size: 3.2rem;
+    .img-wrapper{
+      width: 100%;
+      
+    img{
+        position: absolute;
+        object-fit: cover;
+        object-position: top;
+        width: 50rem;
+        height: 33rem;
+        top: -70px;
+        left: -60px;
       }
-      p{
-        font-size: 1.8rem;
-        font-weight: 300;
-        line-height: 1rem;
-      }
-    } 
+    }
+
   }
 
   @media (min-width: ${({ theme }) => theme.SCREENS.XL}) {
 
-    .img-wrapper{
-      width: auto;
-      height: 40rem;
-      position: relative;
+    .text-wrapper{
+      margin-right: 8rem;
 
-      img{
-        position: absolute;
-        width: 63rem;
-        height:40rem;
-        top: 0;
-        left: -40px;
+      h2{
+        font-size: 4rem;
+      }
+
+      p{
+        font-size: 1.8rem;
       }
     }
-
-    .text-wrapper{
-      h2{
-        font-size: 4.2rem;
-      }
-      p{
-        font-size: 2.4rem;
-        font-weight: 300;
-      }
-    } 
   }
 
 `;

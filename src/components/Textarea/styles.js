@@ -8,4 +8,7 @@ export const Container = styled.textarea`
   border-radius: .5rem;
   padding: 1.6rem;
   resize: none;
+  outline: none;
+
+  color: ${({ theme }) => theme.LIGHT.L100};
 `;

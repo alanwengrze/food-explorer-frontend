@@ -11,7 +11,7 @@ export const Container = styled.button`
 
   font-size: 1.2rem;
 
-  height: 3rem;
+  height: 4.5rem;
   border: none;
   border-radius: 0.5rem;
   color: ${({ theme }) => theme.LIGHT.L100};

@@ -1,15 +1,14 @@
 import { FiChevronLeft } from 'react-icons/fi'
 import { PiReceipt } from 'react-icons/pi'
-import { Container } from "./styles";
+import { Container, Dish } from "./styles";
 import { Header } from "../../components/Header";
-import { Dish } from '../../components/Dish';
 import { Footer } from "../../components/Footer";
 import { ButtonText } from '../../components/ButtonText'
 import { Ingredients } from '../../components/Ingredients'
 import { AddDishes } from '../../components/AddDishes'
 import { Button } from '../../components/Button'
 import { dish } from '../Home/index.jsx'
-export function Details({isAdmin = true}){
+export function Details({isAdmin = true }){
   return(
     <Container>
       <Header />
@@ -18,14 +17,16 @@ export function Details({isAdmin = true}){
           title="voltar"
           icon={FiChevronLeft}
         />
-          <Dish
-            name={dish.name}
-            image={dish.image}
-            description={dish.description}
-            isAdmin
-          />
 
-          <div className="ingredients">
+        <Dish>
+          <div className="img-wrapper">
+            <img src={dish.image} alt="" />
+          </div>
+          <div className="details-wrapper">
+            <h2>{dish.name}</h2>
+            <p>{dish.description}</p>
+
+            <div className="ingredients">
             {
               dish.ingredients.map(ingredient => (
                 <Ingredients
@@ -34,21 +35,24 @@ export function Details({isAdmin = true}){
                 />
               ))
             }
-          </div>
-          {
-            isAdmin ?
-            <Button
-              title="Editar prato"
-            />
-            :
-            <div className="add-wrapper">
-              <AddDishes />
-                <Button
-                  title={`pedir ∙ ${dish.price}`}
-                  icon={PiReceipt}
-                />
             </div>
-          }
+            {
+              isAdmin ?
+              <Button
+                title="Editar prato"
+                className="edit-button"
+              />
+              :
+              <div className="add-wrapper">
+                <AddDishes />
+                  <Button
+                    title={`pedir ∙ ${dish.price}`}
+                    icon={PiReceipt}
+                  />
+              </div>
+            }
+          </div>
+        </Dish>      
       </main>
 
       <Footer />

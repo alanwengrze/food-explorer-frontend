@@ -3,31 +3,64 @@ import styled from "styled-components";
 export const Container = styled.div`
   grid-area: header;
   width: 100%;
-  padding: 4rem 2rem 2rem;
+  padding: 4rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 2rem;
 
   background-color: ${({ theme }) => theme.DARK.D700};
 
-  > div{
-    gap: 0.5rem;
-    img {
-      height: 2.4rem;
-    }
+  .logo{
     h1{
       font-size: 2.4rem;
+      
+      /* don't break words */
+      white-space: nowrap;
     }
+    img{
+      width: 2.4rem;
+    }
+  }
+
+  .desktop-header{
+    display: none;
   }
 
   svg {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
   }
 
-  @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {
+
+  @media (min-width: ${({ theme }) => theme.SCREENS.MD}){
+    padding: 4rem 10rem 2rem;
+
     .menu-icon{
       display: none;
     }
+
+    .desktop-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+
+    div:first-child{
+      flex: 1;
+    }
+
+    .desktop-orders-button{
+      width: auto;
+      font-size: 1.2rem;
+      padding: 1rem 2rem;
+    }
+  }
+
+  .mobile-orders-button {
+    display: none;
+  }
+
   }
 `;
 

@@ -22,13 +22,14 @@ export function NewDish() {
           title="Voltar"
           icon={FiChevronLeft}
         />
-        <h2>Novo prato</h2>
+        <h2>Adicionar prato</h2>
         <Form>
+          <div className="input-wrapper">
           <InputWrapper>
             <Label title="Imagem do prato"/>
             <Input 
               type="file" 
-              title="Selecione a imagem"
+              title="Selecione a imagem para alterá-la"
               icon={FiUpload}
             />
           </InputWrapper>
@@ -44,13 +45,17 @@ export function NewDish() {
               <option value="bebida">Bebidas</option>
             </select>
           </InputWrapper>
+          </div>
+          <div className="input-wrapper ing">
           <InputWrapper>
             <Label title="Ingredientes"/>
             <div className="ingredients">
+              <div className="test">
               <DishItem 
                 placeholder="Ex: Picanha"
                 isNew
               />
+              </div>
               <DishItem 
                 placeholder="Ex: Picanha"
                 isNew
@@ -60,18 +65,23 @@ export function NewDish() {
               />
             </div>
           </InputWrapper>
-          <InputWrapper>
-            <Label title="Preço"/>
-            <Input 
-              type="number" 
-              placeholder="R$ 00,00"
-            />
-          </InputWrapper>
+          <div className="price">
+            <InputWrapper>
+              <Label title="Preço"/>
+              <Input
+                type="number" 
+                placeholder="R$ 00,00"
+              />
+            </InputWrapper>
+          </div>
+          </div>
           <InputWrapper>
             <Label title="Descrição"/>
             <Textarea />
           </InputWrapper>
-          <Button title="Salvar alterações" secundary/>
+          <div className="button-wrapper">
+            <Button title="Salvar alterações" secundary/>
+          </div>
         </Form>
       </main>
       <Footer />

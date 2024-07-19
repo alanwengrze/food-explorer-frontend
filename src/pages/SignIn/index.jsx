@@ -13,6 +13,7 @@ export function SignIn() {
     <Container>
       <Logo />
       <Form>
+        <h1>Faça login</h1>
         <InputWrapper>
           <Label title="Email"/>
           <Input type="email" placeholder="Email" />
@@ -23,10 +24,12 @@ export function SignIn() {
           <Input type="email" placeholder="Senha" />
         </InputWrapper>
         <Button title="Entrar"/>
+
+        <Link to="/signup">
+          <ButtonText title="Criar uma conta"/>
+        </Link>
       </Form>
-      <Link to="/signup">
-        <ButtonText title="Criar uma conta"/>
-      </Link>
+      
     </Container>
   )
 }

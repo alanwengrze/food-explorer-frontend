@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -9,9 +8,36 @@ export const Container = styled.div`
 
   > form {
     margin-top: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 3.2rem;
+
+    h1{
+      font-weight: 400;
+      font-family: "Poppins";
+    }
+    /* input background */
+    div{
+      div{
+        background-color: ${({ theme }) => theme.DARK.D900};
+      }
+    }
   }
 
-  > button:last-child{
-    margin-top: 2rem;
+  @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+
+    form{
+      width: 45rem;
+      padding: 6.4rem;
+      border-radius: 1rem;
+      background-color: ${({ theme }) => theme.DARK.D700};
+      
+    }
   }
 `;

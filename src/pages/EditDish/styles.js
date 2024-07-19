@@ -15,6 +15,20 @@ export const Container = styled.div`
     padding: 2rem;
 
     > button:first-child{
+      font-size:2.8rem;
+      display: flex;
+      align-items: center;
+
+      svg{
+        font-size: 3rem;
+      }
+    }
+
+    @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+      padding: 2rem 10rem;
+    }
+
+    > button:first-child{
       font-size:1.6rem;
       display: flex;
       align-items: center;
@@ -27,8 +41,18 @@ export const Container = styled.div`
     }
 
     form{
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+
+      .input-wrapper{
+          display: flex;
+          flex-direction: column;
+          gap: 2rem;
+        }
 
       select{
+        height: 4.5rem;
         background-color: ${({ theme }) => theme.DARK.D900};
         color: ${({ theme }) => theme.LIGHT.L100};
         border: 0;
@@ -50,6 +74,32 @@ export const Container = styled.div`
       .button-wrapper{
         display: flex;
         gap: 2rem;
+
+        button:first-child{
+          background-color: ${({ theme }) => theme.DARK.D800};
+        }
+      }
+
+      @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+        .input-wrapper{
+          flex-direction: row;
+          gap: 2rem;
+        }
+
+        .price{
+          width: 30%;
+        }
+
+        .button-wrapper{
+          justify-content: end;
+          gap: 2rem;
+
+          button{
+            width: auto;
+            padding: 2rem;
+          }
+          
+        }
       }
     }
   }

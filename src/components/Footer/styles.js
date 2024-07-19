@@ -13,7 +13,6 @@ export const Container = styled.footer`
   background-color: ${({ theme }) => theme.DARK.D700};
 
   > div {
-    gap: 0;
     color: ${({ theme }) => theme.LIGHT.L700};
 
     h1{
@@ -36,5 +35,10 @@ export const Container = styled.footer`
     > div h1{
       font-size: 1.8rem;
     }
+  }
+
+  @media (min-width: ${({ theme }) => theme.SCREENS.MD}){
+    padding: 2rem 10rem;
+    justify-content: space-between;
   }
 `;

@@ -7,6 +7,7 @@ export const Container = styled.div`
   align-items: center;
   gap: 1.5rem;
   padding: 3rem;
+  width: 100%;
   border-radius: 0.8rem;
   background-color: ${({ theme }) => theme.DARK.D200};
 
@@ -32,11 +33,11 @@ export const Container = styled.div`
   }
 
   > span{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
   }
   
   > p {
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     color: ${({ theme }) => theme.COLORS.CAKE_200};
   }
 
@@ -45,7 +46,8 @@ export const Container = styled.div`
   }
   .add-wrapper > button:last-child {
     margin-top: 1.5rem;
-    width: 14rem;
+    width: 100%;
+    
   }
 
   @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {

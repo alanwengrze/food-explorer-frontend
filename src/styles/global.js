@@ -9,6 +9,7 @@ export default createGlobalStyle`
 
   :root {
     font-size: 62.5%;
+    --swiper-navigation-size: 24px;
   }
 
   body{
