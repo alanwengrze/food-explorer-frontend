@@ -8,12 +8,21 @@ import { Ingredients } from '../../components/Ingredients'
 import { AddDishes } from '../../components/AddDishes'
 import { Button } from '../../components/Button'
 import { dish } from '../Home/index.jsx'
-export function Details({isAdmin = true }){
+import { useNavigate } from 'react-router-dom';
+export function Details({isAdmin = false }){
+
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  }
+
   return(
     <Container>
       <Header />
       <main>
         <ButtonText
+          onClick={handleBack}
           title="voltar"
           icon={FiChevronLeft}
         />

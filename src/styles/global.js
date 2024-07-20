@@ -23,6 +23,10 @@ export default createGlobalStyle`
     font-size: 1.4rem;
   }
 
+  a{
+    text-decoration: none;
+  }
+
   button, input, textarea {
     font-family: Poppins;
   }

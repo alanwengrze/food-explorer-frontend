@@ -11,14 +11,20 @@ import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
 
-
+import { useNavigate } from "react-router-dom";
 
 export function NewDish() {
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  }
   return (
     <Container>
       <Header />
       <main>
-        <ButtonText 
+        <ButtonText
+          onClick={handleBack}
           title="Voltar"
           icon={FiChevronLeft}
         />
@@ -50,12 +56,6 @@ export function NewDish() {
           <InputWrapper>
             <Label title="Ingredientes"/>
             <div className="ingredients">
-              <div className="test">
-              <DishItem 
-                placeholder="Ex: Picanha"
-                isNew
-              />
-              </div>
               <DishItem 
                 placeholder="Ex: Picanha"
                 isNew

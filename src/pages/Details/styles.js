@@ -17,14 +17,14 @@ export const Container = styled.div`
     gap: 2.5rem;
     margin-top: 2rem;
 
-    > button:first-child{
+    > a {
       font-size:2.4rem;
       margin-bottom: 4rem;
       display: flex;
       align-items: center;
 
       svg{
-        font-size: 3rem;
+        font-size: 2.4rem;
       }
     }
 
@@ -78,6 +78,7 @@ export const Dish = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 1rem;
 
     button:last-child{
       width: auto;

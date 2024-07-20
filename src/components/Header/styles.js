@@ -23,6 +23,22 @@ export const Container = styled.div`
     }
   }
 
+  .mobile-orders-button{
+    position: relative;
+    text-align: center;
+    button{
+      position: absolute;
+      top: -0.5rem;
+      right: -0.5rem;
+      width: 2rem;
+      height: 2rem;
+      border: none;
+      border-radius: 50%;
+      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+      color: ${({ theme }) => theme.LIGHT.L100};
+    }
+  }
+
   .desktop-header{
     display: none;
   }
@@ -71,15 +87,16 @@ export const Menu = styled.div`
   right: 0;
   width: 100%;
   height: 100vh;
-  z-index: 1;
+  z-index: 2;
   background-color: ${({ theme }) => theme.DARK.D400};
   font-weight: 300;
   .search-wrapper{
     grid-area: content;
     padding: 2rem;
 
-    > button {
+    > a {
       text-align: start;
+      display: block;
       width: 100%;
       margin-top: 2rem;
       font-size: 1.6rem;

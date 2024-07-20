@@ -21,8 +21,7 @@ export const Container = styled.div`
 
     &:hover {
       cursor: pointer;
-      color: ${({ theme }) => theme.COLORS.CAKE_100};
-      fill: ${({ theme }) => theme.COLORS.CAKE_100};
+      fill: ${({ theme }) => theme.LIGHT.L100};
     }
   }
 
@@ -32,8 +31,33 @@ export const Container = styled.div`
     height: 9rem;
   }
 
-  > span{
-    font-size: 1.2rem;
+  /* btn dish name */
+  > a{
+    font-size: 1.4rem;
+    font-weight: 700;
+    white-space: nowrap;
+
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    svg{
+      font-size: 1.8rem;
+    }
+  }
+
+  .description {
+    display: none;
+    
+    max-height: 4rem;
+    color: ${({ theme }) => theme.LIGHT.L400};
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: 400;
+    overflow: hidden;
+    text-overflow: clip;
+    direction: ltr;
   }
   
   > p {
@@ -47,7 +71,7 @@ export const Container = styled.div`
   .add-wrapper > button:last-child {
     margin-top: 1.5rem;
     width: 100%;
-    
+    padding: 0;
   }
 
   @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {
@@ -69,6 +93,12 @@ export const Container = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
+
+    /* btn dish name */
+    > a{
+      font-size: 2rem;
+    }
+
     img{
       width: 15rem;
       height: 15rem;
@@ -84,6 +114,10 @@ export const Container = styled.div`
 
     > span{
     font-size: 2.2rem;
+    }
+
+    .description {
+      display: block;
     }
   
     > p {

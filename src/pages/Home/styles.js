@@ -19,9 +19,6 @@ export const Container = styled.header`
     }
   }
 
-  .category-wrapper{
-    background-image: ${({ theme }) => theme.GRADIENTS.G100};
-  }
 `;
 
 export const Banner = styled.div`

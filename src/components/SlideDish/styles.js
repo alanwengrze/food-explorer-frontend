@@ -9,6 +9,7 @@ html,
   width: 100%;
   display: flex;
   gap: 2rem;
+  
 }
 
 .swiper-slide {
@@ -16,10 +17,13 @@ html,
   display: flex;
 }
 
+.swiper-pagination-bullet{
+  display: none;
+}
+
 div.swiper-button-prev,
 div.swiper-button-next {
    color: white;
-   
    svg {
     font-size: 1rem;
    }
