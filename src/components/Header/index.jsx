@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useAuth } from '../../hooks/auth'
 import { FiMenu, FiX, FiSearch, FiLogOut } from 'react-icons/fi'
 import { PiReceipt } from 'react-icons/pi'
 import { Container, Menu } from './styles'
@@ -11,6 +12,7 @@ import { Link } from 'react-router-dom'
 
 export function Header({isAdmin = true, total}){
   const [open, setOpen] = useState(false);
+  const {signOut} = useAuth();
   total = 0
   const handleMenuToggle = () => {
     setOpen(!open);
@@ -39,7 +41,7 @@ export function Header({isAdmin = true, total}){
           }
           <ButtonText
             title='Sair'
-            onClick={handleMenuToggle}
+            onClick={signOut}
           />
         </div>
 
@@ -74,6 +76,7 @@ export function Header({isAdmin = true, total}){
        }
         <ButtonText 
           icon={FiLogOut}
+          onClick={signOut}
         />
       </div>
       {

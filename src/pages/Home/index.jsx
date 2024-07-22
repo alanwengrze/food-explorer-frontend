@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { useAuth } from '../../hooks/auth'
 import { Container, Banner } from './styles'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
@@ -20,6 +22,7 @@ export const dish = {
   ]
 }
 export function Home(){
+  const { user } = useAuth();
   return(
     <Container>
       <Header />
