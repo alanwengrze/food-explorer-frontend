@@ -50,12 +50,6 @@ export function EditDish() {
           <InputWrapper>
             <Label title="Ingredientes"/>
             <div className="ingredients">
-              <div className="test">
-              <DishItem 
-                placeholder="Ex: Picanha"
-                isNew
-              />
-              </div>
               <DishItem 
                 placeholder="Ex: Picanha"
                 isNew

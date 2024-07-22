@@ -24,10 +24,11 @@ export function SignIn() {
           <Input type="email" placeholder="Senha" />
         </InputWrapper>
         <Button title="Entrar"/>
-
-        <Link to="/signup">
-          <ButtonText title="Criar uma conta"/>
-        </Link>
+        <ButtonText
+          to="/signup"
+          title="Criar uma conta"
+          
+        />
       </Form>
       
     </Container>

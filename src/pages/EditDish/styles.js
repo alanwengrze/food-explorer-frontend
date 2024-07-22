@@ -61,6 +61,10 @@ export const Container = styled.div`
         margin-bottom: 1rem;
       }
 
+      option{
+        border-radius: 0;
+      }
+
       .ingredients{
         width: auto;
         display: flex;
