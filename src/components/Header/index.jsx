@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useAuth } from '../../hooks/auth'
 import { FiMenu, FiX, FiSearch, FiLogOut } from 'react-icons/fi'
 import { PiReceipt } from 'react-icons/pi'
@@ -10,13 +10,16 @@ import { Button } from '../../components/Button'
 import { Footer } from '../Footer'
 import { Link } from 'react-router-dom'
 
-export function Header({isAdmin = true, total}){
+export function Header({isAdmin = true, total, onSearch}){
+  const {signOut, user} = useAuth();
   const [open, setOpen] = useState(false);
-  const {signOut} = useAuth();
-  total = 0
+  isAdmin = user.role === "admin"
+
+
   const handleMenuToggle = () => {
     setOpen(!open);
   };
+
   return(
     <Container $isadmin={isAdmin}>
       <Menu data-open-menu={open}>
@@ -30,13 +33,14 @@ export function Header({isAdmin = true, total}){
           <Input
             icon={FiSearch}
             placeholder='Busque por pratos ou ingredientes'
+            onChange={onSearch}
           />
 
           {
             isAdmin && 
             <ButtonText
               title='Novo prato'
-              onClick={handleMenuToggle}
+              to='/newdish'
             />
           }
           <ButtonText
@@ -58,6 +62,7 @@ export function Header({isAdmin = true, total}){
         <Input 
           icon={FiSearch}
           placeholder='Busque por pratos ou ingredientes'
+          onChange={onSearch}
         />
        {
          isAdmin?

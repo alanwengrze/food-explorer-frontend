@@ -1,3 +1,7 @@
+import { useState, useEffect } from 'react';
+import { useAuth } from '../../hooks/auth'
+import { api } from '../../services/api'
+
 import { FiChevronLeft } from 'react-icons/fi'
 import { PiReceipt } from 'react-icons/pi'
 import { Container, Dish } from "./styles";
@@ -7,16 +11,41 @@ import { ButtonText } from '../../components/ButtonText'
 import { Ingredients } from '../../components/Ingredients'
 import { AddDishes } from '../../components/AddDishes'
 import { Button } from '../../components/Button'
-import { dish } from '../Home/index.jsx'
-import { useNavigate } from 'react-router-dom';
-export function Details({isAdmin = false }){
+import { useNavigate, useParams } from 'react-router-dom';
+
+export function Details({isAdmin }){
+  const { user } = useAuth();
+  const [dishesCount, setDishesCount] = useState(0);
+  const [dish, setDish] = useState({});
 
   const navigate = useNavigate();
+  const params = useParams();
+  
+  user.role === "admin" ? isAdmin = true : isAdmin = false;
 
+  const handleAddDishes = () => {
+    setDishesCount(prevState => prevState + 1);
+  }
+  const handleRemoveDishes = () => {
+    setDishesCount(prevState => prevState - 1);
+  }
+
+  const handleEditDish = () => {
+    navigate(`/editdish/${params.id}`);
+  }
   const handleBack = () => {
     navigate(-1);
   }
 
+
+  useEffect(() => {
+    async function fetchDish(){
+      const response = await api.get(`/dishes/${params.id}`);
+      setDish(response.data);
+    }
+
+    fetchDish();
+  }, []);
   return(
     <Container>
       <Header />
@@ -27,20 +56,22 @@ export function Details({isAdmin = false }){
           icon={FiChevronLeft}
         />
 
-        <Dish>
+        {
+          dish && 
+          <Dish>
           <div className="img-wrapper">
-            <img src={dish.image} alt="" />
+          <img src={`${api.defaults.baseURL}/files/${dish.image}`} alt={dish.name} />
           </div>
           <div className="details-wrapper">
             <h2>{dish.name}</h2>
             <p>{dish.description}</p>
-
             <div className="ingredients">
             {
+              dish.ingredients &&
               dish.ingredients.map(ingredient => (
                 <Ingredients
-                  key={ingredient}
-                  ingredients={ingredient}
+                  key={ingredient.id}
+                  ingredients={ingredient.name}
                 />
               ))
             }
@@ -50,18 +81,25 @@ export function Details({isAdmin = false }){
               <Button
                 title="Editar prato"
                 className="edit-button"
+                onClick={handleEditDish}
               />
               :
               <div className="add-wrapper">
-                <AddDishes />
-                  <Button
-                    title={`pedir ∙ ${dish.price}`}
-                    icon={PiReceipt}
-                  />
+                <AddDishes 
+                  dishCount={dishesCount}
+                  handleAdd={handleAddDishes}
+                  handleRemove={handleRemoveDishes}
+                />
+                <Button
+                  title={`pedir ∙ ${dish.price}`}
+                  icon={PiReceipt}
+                />
+                  
               </div>
             }
           </div>
-        </Dish>      
+        </Dish> 
+        }     
       </main>
 
       <Footer />

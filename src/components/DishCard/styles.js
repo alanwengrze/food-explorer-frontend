@@ -24,6 +24,7 @@ export const Container = styled.div`
       fill: ${({ theme }) => theme.LIGHT.L100};
     }
   }
+  
 
  
   > img {
@@ -31,20 +32,27 @@ export const Container = styled.div`
     height: 9rem;
   }
 
-  /* btn dish name */
-  > a{
-    font-size: 1.4rem;
-    font-weight: 700;
-    white-space: nowrap;
+  .btn-name{
+    background-color: transparent;
+    border: none;
 
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
+    > a{
+      font-size: 1.4rem;
+      font-weight: 700;
+      white-space: nowrap;
 
-    svg{
-      font-size: 1.8rem;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+
+      svg{
+        font-size: 1.8rem;
+      }
     }
   }
+
+  /* btn dish name */
+
 
   .description {
     display: none;

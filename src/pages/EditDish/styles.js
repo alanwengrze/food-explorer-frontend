@@ -14,7 +14,7 @@ export const Container = styled.div`
     overflow-y: scroll;
     padding: 2rem;
 
-    > button:first-child{
+    > a{
       font-size:2.8rem;
       display: flex;
       align-items: center;

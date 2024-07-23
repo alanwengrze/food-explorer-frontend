@@ -13,13 +13,16 @@ export const Container = styled.div`
     grid-area: content;
     overflow-y: scroll;
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: 2.5rem;
     margin-top: 2rem;
 
     > a {
       font-size:2.4rem;
-      margin-bottom: 4rem;
+      margin: 4rem 10rem 0 0;
       display: flex;
       align-items: center;
 
@@ -30,6 +33,12 @@ export const Container = styled.div`
 
     @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
       padding: 2rem 10rem;
+      align-items: flex-start;
+      justify-content: right;
+
+      > a {
+        margin: 4rem 0 0 0;
+      }
     }
 
   }

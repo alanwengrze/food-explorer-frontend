@@ -1,16 +1,20 @@
 import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
 import { Container } from "./styles";
 import { AddDishes } from "../AddDishes";
 import { Button } from "../Button";
 import { FiHeart, FiEdit2, FiChevronRight } from 'react-icons/fi'
 import { ButtonText } from '../ButtonText'
 
-import { useNavigate, Link } from "react-router-dom";
 
-export function DishCard({ name, image, description, price, isAdmin = true, ...rest }) {
-  const [dishesCount, setDishesCount] = useState(0)
+export function DishCard({ name, image, description, price, dish, isAdmin = false, onDetails, onEdit, onCart,...rest }) {
+  const [dishesCount, setDishesCount] = useState(0);
 
-  const navigate = useNavigate();
+  const { user } = useAuth();
+
+  if(user.role === "admin") {
+    isAdmin = true;
+  }
 
   const handleAddDishes = () => {
     setDishesCount(prevState => prevState + 1);
@@ -19,18 +23,18 @@ export function DishCard({ name, image, description, price, isAdmin = true, ...r
     setDishesCount(prevState => prevState - 1);
   }
 
-  const handleEditDish = () => {
-    navigate(`/editdish/1`);
-  }
   return (
-    <Container {...rest} data-desktop={false}>
-      { isAdmin ? <FiEdit2 onClick={handleEditDish}/> : <FiHeart /> }
+    <Container {...rest}>
+      { isAdmin ? <FiEdit2 onClick={onEdit}/> : <FiHeart /> }
       <img src={image} alt={name} />
-      <ButtonText
-        to={`/details/1`}
-        title={name}
-        icon={FiChevronRight}
-      />
+      
+      <button onClick={onDetails} className="btn-name">
+        <ButtonText
+          onClick={onDetails}
+          title={name}
+          icon={FiChevronRight}
+        />
+      </button>
       <p className="description">{description}</p>
       <p>{price}</p>
      {
@@ -41,7 +45,10 @@ export function DishCard({ name, image, description, price, isAdmin = true, ...r
             handleAdd={handleAddDishes}
             handleRemove={handleRemoveDishes}
           />
-          <Button title="incluir"/>
+          <Button 
+            title="incluir"
+            onClick={onCart}
+          />
         </div>
      }
     </Container>

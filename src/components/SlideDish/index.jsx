@@ -1,9 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-
-import { DishCard } from '../DishCard';
-import { dish } from '../../pages/Home';
 
 // Import Swiper styles
 import 'swiper/css';
@@ -16,8 +13,8 @@ import { Container } from './styles';
 // import required modules
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 
-export function SlideDish() {
-  
+export function SlideDish({children}) {
+
   return (
     <Container>
       <Swiper
@@ -48,62 +45,11 @@ export function SlideDish() {
             },
             1224: {
               slidesPerView: 4,
-            },
-            
-            1440:{
-              slidesPerView: 5,
             }
           }
         }
       >
-        <SwiperSlide>
-          <DishCard 
-            name={dish.name}
-            image={dish.image}
-            description={dish.description}
-            price={dish.price}
-          />    
-        </SwiperSlide>
-        <SwiperSlide>
-          <DishCard 
-            name={dish.name}
-            image={dish.image}
-            description={dish.description}
-            price={dish.price}
-          />    
-        </SwiperSlide>
-        <SwiperSlide>
-          <DishCard 
-            name={dish.name}
-            image={dish.image}
-            description={dish.description}
-            price={dish.price}
-          />    
-        </SwiperSlide>
-        <SwiperSlide>
-          <DishCard 
-            name={dish.name}
-            image={dish.image}
-            description={dish.description}
-            price={dish.price}
-          />    
-        </SwiperSlide>
-        <SwiperSlide>
-          <DishCard 
-            name={dish.name}
-            image={dish.image}
-            description={dish.description}
-            price={dish.price}
-          />    
-        </SwiperSlide>
-        <SwiperSlide>
-          <DishCard 
-            name={dish.name}
-            image={dish.image}
-            description={dish.description}
-            price={dish.price}
-          />    
-        </SwiperSlide>
+      {children}
       </Swiper>
     </Container>
   );

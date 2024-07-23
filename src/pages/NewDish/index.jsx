@@ -1,3 +1,7 @@
+import { useState } from "react";
+import { useAuth } from "../../hooks/auth";
+import { api } from "../../services/api";
+
 import { FiChevronLeft, FiUpload } from "react-icons/fi";
 import { Container } from "./styles";
 import { Header } from "../../components/Header";
@@ -14,7 +18,61 @@ import { Footer } from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 export function NewDish() {
+  const { user } = useAuth();
+  const [ingredients, setIngredients] = useState([]);
+  const [newIngredient, setNewIngredient] = useState('');
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [price, setPrice] = useState('');
+  const [category, setCategory] = useState('');
+
   const navigate = useNavigate();
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImageFile(file);
+
+    console.log(file);
+  }
+
+  const handleAddIngredient = () => {
+    if(newIngredient === "") {
+      return alert("Por favor, adicione um ingrediente.");
+    }
+    setIngredients(prevState => [...prevState, newIngredient]);
+
+    setNewIngredient('');
+  }
+
+  const handleRemoveIngredient = (deleted) => {
+    setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
+  }
+
+  const handleAddDish = async () => {
+    
+    if(!ingredients) {
+      return alert("Não é possível adicionar pratos sem ingredientes");
+    }
+    if(newIngredient !== ""){
+      return alert ("Você tem um ingrediente que não foi adicionado");
+    }
+    try {
+      await api.post("/dishes", {
+        name,
+        description,
+        price,
+        category,
+        ingredients
+      });
+    } catch (error) {
+      if(error.response) {
+        return alert(error.response.data.message);
+      }
+    }
+
+    alert("Prato criado com sucesso!");
+    navigate(-1);
+  }
 
   const handleBack = () => {
     navigate(-1);
@@ -29,7 +87,7 @@ export function NewDish() {
           icon={FiChevronLeft}
         />
         <h2>Adicionar prato</h2>
-        <Form>
+        <Form >
           <div className="input-wrapper">
           <InputWrapper>
             <Label title="Imagem do prato"/>
@@ -37,18 +95,27 @@ export function NewDish() {
               type="file" 
               title="Selecione a imagem para alterá-la"
               icon={FiUpload}
+              onChange={handleImageChange}
             />
           </InputWrapper>
           <InputWrapper>
             <Label title="Nome"/>
-            <Input placeholder="Ex: Salada Ceasar"/>
+            <Input 
+              placeholder="Ex: Salada Ceasar"
+              onChange={e => setName(e.target.value)}
+            />
           </InputWrapper>
           <InputWrapper>
             <Label title="Categoria"/>
-            <select name="Categorias" id="">
-              <option value="refeicao">Refeição</option>
-              <option value="sobremesa">Sobremesa</option>
-              <option value="bebida">Bebidas</option>
+            <select 
+              name="Categorias" 
+              id=""
+              defaultValue="meal"
+              onChange={e => setCategory(e.target.value)}
+            >
+              <option value="meal">Refeição</option>
+              <option value="dessert">Sobremesa</option>
+              <option value="drink">Bebidas</option>
             </select>
           </InputWrapper>
           </div>
@@ -56,13 +123,22 @@ export function NewDish() {
           <InputWrapper>
             <Label title="Ingredientes"/>
             <div className="ingredients">
-              <DishItem 
-                placeholder="Ex: Picanha"
+              <DishItem
                 isNew
+                placeholder="Ex: Picanha"
+                value={newIngredient}
+                onChange={e => setNewIngredient(e.target.value)}
+                onClick={handleAddIngredient}
               />
-              <DishItem 
-                value="Picanha"
-              />
+             {
+              ingredients.map((ingredient, index) => (
+               <DishItem 
+                key={String(index)}
+                value={ingredient}
+                onClick={() => handleRemoveIngredient(ingredient)}
+               />
+              ))
+             }
             </div>
           </InputWrapper>
           <div className="price">
@@ -71,16 +147,24 @@ export function NewDish() {
               <Input
                 type="number" 
                 placeholder="R$ 00,00"
+                onChange={e => setPrice(e.target.value)}
               />
             </InputWrapper>
           </div>
           </div>
           <InputWrapper>
             <Label title="Descrição"/>
-            <Textarea />
+            <Textarea 
+              placeholder="Fale sobre o prato..."
+              onChange={e => setDescription(e.target.value)}
+            />
           </InputWrapper>
           <div className="button-wrapper">
-            <Button title="Salvar alterações" secundary/>
+            <Button 
+              title="Salvar alterações" 
+              $secundary
+              onClick={handleAddDish}
+            />
           </div>
         </Form>
       </main>
