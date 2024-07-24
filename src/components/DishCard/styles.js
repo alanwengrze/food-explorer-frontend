@@ -11,6 +11,8 @@ export const Container = styled.div`
   border-radius: 0.8rem;
   background-color: ${({ theme }) => theme.DARK.D200};
 
+  
+
   > svg:first-child {
     position: absolute;
     top: 1rem;

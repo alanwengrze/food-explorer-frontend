@@ -13,9 +13,13 @@ import { AddDishes } from '../../components/AddDishes'
 import { Button } from '../../components/Button'
 import { useNavigate, useParams } from 'react-router-dom';
 
+import { motion } from 'framer-motion';
+
+
 export function Details({isAdmin }){
   const { user } = useAuth();
   const [dishesCount, setDishesCount] = useState(0);
+  const [countCart, setCountCart] = useState(0);
   const [dish, setDish] = useState({});
 
   const navigate = useNavigate();
@@ -29,6 +33,12 @@ export function Details({isAdmin }){
   const handleRemoveDishes = () => {
     setDishesCount(prevState => prevState - 1);
   }
+
+  const handleAddToCart = () => {
+    setCountCart(prevState => prevState + dishesCount);
+    console.log(countCart);
+  }
+
 
   const handleEditDish = () => {
     navigate(`/editdish/${params.id}`);
@@ -47,62 +57,71 @@ export function Details({isAdmin }){
     fetchDish();
   }, []);
   return(
-    <Container>
-      <Header />
-      <main>
-        <ButtonText
-          onClick={handleBack}
-          title="voltar"
-          icon={FiChevronLeft}
+    <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    >
+      <Container>
+        <Header 
+          total={countCart}
         />
+        <main>
+          <ButtonText
+            onClick={handleBack}
+            title="voltar"
+            icon={FiChevronLeft}
+          />
 
-        {
-          dish && 
-          <Dish>
-          <div className="img-wrapper">
-          <img src={`${api.defaults.baseURL}/files/${dish.image}`} alt={dish.name} />
-          </div>
-          <div className="details-wrapper">
-            <h2>{dish.name}</h2>
-            <p>{dish.description}</p>
-            <div className="ingredients">
-            {
-              dish.ingredients &&
-              dish.ingredients.map(ingredient => (
-                <Ingredients
-                  key={ingredient.id}
-                  ingredients={ingredient.name}
-                />
-              ))
-            }
+          {
+            dish && 
+            <Dish>
+            <div className="img-wrapper">
+            <img src={`${api.defaults.baseURL}/files/${dish.image}`} alt={dish.name} />
             </div>
-            {
-              isAdmin ?
-              <Button
-                title="Editar prato"
-                className="edit-button"
-                onClick={handleEditDish}
-              />
-              :
-              <div className="add-wrapper">
-                <AddDishes 
-                  dishCount={dishesCount}
-                  handleAdd={handleAddDishes}
-                  handleRemove={handleRemoveDishes}
-                />
-                <Button
-                  title={`pedir ∙ ${dish.price}`}
-                  icon={PiReceipt}
-                />
-                  
+            <div className="details-wrapper">
+              <h2>{dish.name}</h2>
+              <p>{dish.description}</p>
+              <div className="ingredients">
+              {
+                dish.ingredients &&
+                dish.ingredients.map(ingredient => (
+                  <Ingredients
+                    key={ingredient.id}
+                    ingredients={ingredient.name}
+                  />
+                ))
+              }
               </div>
-            }
-          </div>
-        </Dish> 
-        }     
-      </main>
+              {
+                isAdmin ?
+                <Button
+                  title="Editar prato"
+                  className="edit-button"
+                  onClick={handleEditDish}
+                />
+                :
+                <div className="add-wrapper">
+                  <AddDishes 
+                    dishCount={dishesCount}
+                    handleAdd={handleAddDishes}
+                    handleRemove={handleRemoveDishes}
+                  />
+                  <Button
+                    title={`pedir ∙ ${dish.price}`}
+                    icon={PiReceipt}
+                    onClick={handleAddToCart}
+                  />
+                    
+                </div>
+              }
+            </div>
+          </Dish> 
+          }     
+        </main>
 
-      <Footer />
-    </Container>
+        <Footer />
+      </Container>
+    /</motion.div>
   )
 }

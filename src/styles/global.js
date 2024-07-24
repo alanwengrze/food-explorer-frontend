@@ -34,4 +34,28 @@ export default createGlobalStyle`
   button{
     cursor: pointer;
   }
+
+  @keyframes modalAnimation {
+    from { 
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+  }
+
+  @keyframes modalAnimationReverse {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    
+  }
 `;

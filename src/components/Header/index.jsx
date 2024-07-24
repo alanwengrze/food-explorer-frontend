@@ -8,17 +8,27 @@ import { Input } from '../../components/Input'
 import { ButtonText } from '../../components/ButtonText'
 import { Button } from '../../components/Button'
 import { Footer } from '../Footer'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { AlertDialog } from '../AlertDialog'
 
 export function Header({isAdmin = true, total, onSearch}){
   const {signOut, user} = useAuth();
   const [open, setOpen] = useState(false);
+  const [openAlert, setOpenAlert] = useState(false);
   isAdmin = user.role === "admin"
+
+  const navigate = useNavigate();
 
 
   const handleMenuToggle = () => {
     setOpen(!open);
   };
+
+  const handleSignOut = () => {
+    navigate('/');
+    signOut();
+  }
 
   return(
     <Container $isadmin={isAdmin}>
@@ -81,8 +91,16 @@ export function Header({isAdmin = true, total, onSearch}){
        }
         <ButtonText 
           icon={FiLogOut}
-          onClick={signOut}
+          onClick={() => setOpenAlert(true)}
         />
+
+        <AlertDialog 
+          isOpen={openAlert}
+          message="Tem certeza que deseja sair?"
+          onConfirm={handleSignOut}
+          onCancel={() => setOpenAlert(false)}
+        />
+        
       </div>
       {
         !isAdmin &&

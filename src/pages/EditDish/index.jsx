@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { api } from "../../services/api";
 import { useParams, useNavigate } from "react-router-dom";
 import { FiChevronLeft, FiUpload } from "react-icons/fi";
@@ -13,8 +16,7 @@ import { DishItem } from "../../components/DishItem";
 import { Textarea } from "../../components/Textarea";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
-
-
+import { AlertDialog } from "../../components/AlertDialog";	
 
 export function EditDish() {
   const [ingredients, setIngredients] = useState([]);
@@ -24,10 +26,16 @@ export function EditDish() {
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
   const [imageFile, setImageFile] = useState(null);
+  const [openAlert, setOpenAlert] = useState(false);
 
   const params = useParams();
   const navigate = useNavigate();
 
+  const openAlertDialog = (e) => {
+    e.preventDefault();
+
+    setOpenAlert(true);
+  }
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -36,9 +44,11 @@ export function EditDish() {
     console.log(imageFile);
   }
 
-  const handleAddIngredient = () => {
+  const handleAddIngredient = (e) => {
+    e.preventDefault();
+    
     if(newIngredient === "") {
-      return alert("Por favor, adicione um ingrediente.");
+      return toast.error("Por favor, adicione um ingrediente.");
     }
     setIngredients(prevState => [...prevState, newIngredient]);
     console.log(ingredients);
@@ -50,13 +60,14 @@ export function EditDish() {
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
   }
 
-  const handleUpdateDish = async () => {
+  const handleUpdateDish = async (e) => {
+    e.preventDefault();
 
     if(ingredients.length === 0) {
-      return alert("Não é possível editar pratos sem ingredientes");
+      return toast.error("Não é possível editar pratos sem ingredientes");
     }
     if(newIngredient !== ""){
-      return alert ("Não é possível editar pratos sem ingredientes");
+      return toast.error("Não é possível editar pratos sem ingredientes");
     }
 
     try {
@@ -77,13 +88,42 @@ export function EditDish() {
       });
     } catch (error) {
       if(error.response) {
-        alert(error.response.data.message);
+        toast.error(error.response.data.message);
       } else {
-        alert("Não foi possível editar o prato");
+        toast.error("Não foi possível editar o prato");
       }
     }
-    alert("Prato editado com sucesso");
-    navigate(-1);
+    toast.success("Prato editado com sucesso", {
+      position: "top-center",
+      autoClose: 1500,
+      pauseOnHover: false
+    });
+
+    setTimeout(()=>{
+      navigate("/");
+    }, 2000);
+  }
+  const handleRemoveDish = async (e) => {
+    e.preventDefault();
+
+    try {
+      await api.delete(`/dishes/${params.id}`);
+    } catch (error) {
+      if(error.response) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("Não foi possível remover o prato");
+      }
+    }
+    toast.success("Prato removido com sucesso", {
+      position: "top-center",
+      autoClose: 1500,
+      pauseOnHover: false
+    });
+
+    setTimeout(()=>{
+      navigate("/");
+    }, 2000);
   }
   useEffect(() => {
     api.get(`/dishes/${params.id}`).then(response => {
@@ -95,6 +135,10 @@ export function EditDish() {
   }, []);
   return (
     <Container>
+      <ToastContainer 
+        theme="dark"
+        autoClose={3000}
+      />
       <Header />
       <main>
         <ButtonText
@@ -158,6 +202,7 @@ export function EditDish() {
                 ))
               }
             </div>
+            
           </InputWrapper>
           <div className="price">
             <InputWrapper>
@@ -180,7 +225,16 @@ export function EditDish() {
             />
           </InputWrapper>
           <div className="button-wrapper">
-            <Button title="Excluir prato"/>
+            <AlertDialog
+              isOpen={openAlert}
+              message="Tem certeza que deseja remover o prato?"
+              onConfirm={handleRemoveDish}
+              onCancel={() => setOpenAlert(false)}
+            />
+            <Button 
+              title="Excluir prato"
+              onClick={openAlertDialog}
+            />
             <Button 
               title="Salvar alterações" 
               secundary

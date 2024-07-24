@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { useAuth } from "../../hooks/auth";
 import { api } from "../../services/api";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import { FiChevronLeft, FiUpload } from "react-icons/fi";
 import { Container } from "./styles";
@@ -18,7 +20,6 @@ import { Footer } from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 
 export function NewDish() {
-  const { user } = useAuth();
   const [ingredients, setIngredients] = useState([]);
   const [newIngredient, setNewIngredient] = useState('');
   const [name, setName] = useState('');
@@ -29,15 +30,18 @@ export function NewDish() {
   const navigate = useNavigate();
 
   const handleImageChange = (e) => {
+    e.preventDefault();
     const file = e.target.files[0];
     setImageFile(file);
 
     console.log(file);
   }
 
-  const handleAddIngredient = () => {
+  const handleAddIngredient = (e) => {
+    e.preventDefault();
+
     if(newIngredient === "") {
-      return alert("Por favor, adicione um ingrediente.");
+      return toast.error("Por favor, adicione um ingrediente.");
     }
     setIngredients(prevState => [...prevState, newIngredient]);
 
@@ -48,13 +52,14 @@ export function NewDish() {
     setIngredients(prevState => prevState.filter(ingredient => ingredient !== deleted));
   }
 
-  const handleAddDish = async () => {
+  const handleAddDish = async (e) => {
+    e.preventDefault();
     
     if(!ingredients) {
-      return alert("Não é possível adicionar pratos sem ingredientes");
+      return toast.error("Não é possível adicionar pratos sem ingredientes");
     }
     if(newIngredient !== ""){
-      return alert ("Você tem um ingrediente que não foi adicionado");
+      return toast.error("Você tem um ingrediente que não foi adicionado");
     }
     try {
       await api.post("/dishes", {
@@ -66,19 +71,35 @@ export function NewDish() {
       });
     } catch (error) {
       if(error.response) {
-        return alert(error.response.data.message);
+        return toast.error(error.response.data.message);
       }
     }
 
-    alert("Prato criado com sucesso!");
-    navigate(-1);
+    toast.success("Prato criado com sucesso!", 
+      {
+        position: "top-center",
+        autoClose: 1500,
+        pauseOnHover: false
+      });
+
+    setTimeout(()=>{
+      navigate("/");
+    }, 2000)
   }
 
-  const handleBack = () => {
+  const handleBack = (e) => {
+    e.preventDefault();
+
     navigate(-1);
   }
   return (
     <Container>
+      <ToastContainer 
+        theme="dark"
+        autoClose={3000}
+        position="top-right"
+        pauseOnHover={false}
+      />
       <Header />
       <main>
         <ButtonText

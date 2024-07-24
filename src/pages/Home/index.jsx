@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react'
-import { api } from '../../services/api'
-import { useNavigate, useParams } from 'react-router-dom'
-import { Container, Banner } from './styles'
-import { Header } from '../../components/Header'
-import { Footer } from '../../components/Footer'
-import { Category } from '../../components/Category'
-import bannerImg from '../../assets/bannerImg.png'
+import { useState, useEffect } from 'react';
+import { api } from '../../services/api';
+import { useNavigate } from 'react-router-dom';
+import { Container, Banner } from './styles';
+import { Header } from '../../components/Header';
+import { Footer } from '../../components/Footer';
+import { Category } from '../../components/Category';
+import bannerImg from '../../assets/bannerImg.png';
 
+import { motion } from 'framer-motion';
 import { SlideDish } from '../../components/SlideDish'
 import { SwiperSlide } from 'swiper/react';
 import { DishCard } from '../../components/DishCard';
@@ -33,25 +34,40 @@ export function Home(){
 
   useEffect(() => {
     async function fetchDishes(){
-      const response = await api.get(`/dishes?name=${search}&ingredients=${search}`);
-      setDishes(response.data);
+      const responseName = await api.get(`/dishes?name=${search}`);
+      const responseIngredients = await api.get(`/dishes?ingredients=${search}`);
+
+      if(responseName.data.length > 0){
+        setDishes(responseName.data);
+      } else if(responseIngredients.data.length > 0){
+        setDishes(responseIngredients.data);
+      }else{
+        setDishes([]);
+      }
     }
 
     fetchDishes();
   }, [search]);
 
+
   useEffect(() => {
-    async function fetchDishes(){
+    async function fetchAllDishes(){
       const response = await api.get('/dishes');
       setDishes(response.data);
     }
 
-    fetchDishes();
+    fetchAllDishes();
   }, []);
   return(
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
     <Container>
       <Header 
-        onSearch={(e) => setSearch(e.target.value)}
+        onSearch={
+          (e) => setSearch(e.target.value)}
         total={countCart}
       />
         <main>
@@ -67,6 +83,7 @@ export function Home(){
 
           <div className="category-wrapper">
             <Category title='Refeições'>
+              
               <SlideDish>
                 {
                   dishes.filter(dish => dish.category === "meal" ).map((dish, index) => (
@@ -80,6 +97,7 @@ export function Home(){
                         price={`R$ ${dish.price}`}
 
                         onCart={handleAddToCart}
+                        
                       />
                     </SwiperSlide>
                   ))
@@ -92,6 +110,8 @@ export function Home(){
                   dishes.filter(dish => dish.category === "dessert" ).map((dish, index)=> (
                     <SwiperSlide key={index}>
                       <DishCard
+                        onEdit={() => handleEditDish(dish.id)}
+                        onDetails={() => handleDish(dish.id)}
                         name={dish.name}
                         image={`${api.defaults.baseURL}/files/${dish.image}`}
                         description={dish.description}
@@ -110,6 +130,7 @@ export function Home(){
                   dishes.filter(dish => dish.category === "drink" ).map((dish, index) => (
                     <SwiperSlide key={index}>
                       <DishCard
+                        onEdit={() => handleEditDish(dish.id)}
                         onDetails={() => handleDish(dish.id)}
                         name={dish.name}
                         image={`${api.defaults.baseURL}/files/${dish.image}`}
@@ -127,5 +148,6 @@ export function Home(){
         </main>
       <Footer />
     </Container>
+    </motion.div>
   )
 }
