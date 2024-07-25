@@ -53,9 +53,16 @@ export function Header({isAdmin = true, total, onSearch}){
               to='/newdish'
             />
           }
-          <ButtonText
-            title='Sair'
-            onClick={signOut}
+          <ButtonText 
+            title="Sair"
+            onClick={() => setOpenAlert(true)}
+          />
+
+          <AlertDialog 
+            isOpen={openAlert}
+            message="Tem certeza que deseja sair?"
+            onConfirm={handleSignOut}
+            onCancel={() => setOpenAlert(false)}
           />
         </div>
 

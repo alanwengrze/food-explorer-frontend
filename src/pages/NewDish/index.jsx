@@ -18,7 +18,6 @@ import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
 
 import { useNavigate } from "react-router-dom";
-import { formatPrice } from "../../utils/format";
 
 export function NewDish() {
   const [ingredients, setIngredients] = useState([]);

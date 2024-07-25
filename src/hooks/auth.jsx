@@ -14,10 +14,16 @@ function AuthProvider({children}){
   async function signIn({email, password}){
 
     try{
-      const response = await api.post("/sessions", {
-        email, 
-        password
-      });
+      const response = await toast.promise(
+        api.post("/sessions", {
+          email, 
+          password
+        }),
+        {
+          pending: "Realizando login...",
+          success: "Login realizado com sucesso",
+        }
+      )
       const { user, token } = response.data;
 
       api.defaults.headers.Authorization = `Bearer ${token}`;
@@ -32,7 +38,7 @@ function AuthProvider({children}){
       if(error.response){
         toast.error(error.response.data.message)
       }else{
-        toast.error("Não foi possivel realizar o login")
+        toast.error("Não foi possível realizar o login.")
       }
     }
   }

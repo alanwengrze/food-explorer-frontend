@@ -38,7 +38,7 @@ export const Container = styled.div`
       padding: 6.4rem;
       border-radius: 1rem;
       background-color: ${({ theme }) => theme.DARK.D700};
-      
+
     }
   }
 `;
