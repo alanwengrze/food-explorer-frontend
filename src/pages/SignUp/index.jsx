@@ -21,25 +21,23 @@ export function SignUp() {
 
   const navigate = useNavigate();
 
-  const handleSignUp = (e) =>{
+  const handleSignUp = async (e) =>{
     e.preventDefault();
 
-    api.post("/users", { name, email, password })
-    .then(()=>{
+    try{
+      await api.post("/users", { name, email, password })
       toast.success("Conta criada com sucesso", {
         position: "top-center",
         autoClose: 1500,
         pauseOnHover: false
       })
-      navigate('/')
-    }).catch(error => {
-      if(error.response){
-        toast.error(error.response.data.message)
-      }else{
-        toast.error("Não foi possível criar sua conta")
-      }
-    })
-    console.log(name, email, password)
+
+      navigate("/");
+    }catch(error){
+      toast.info(error.response.data.message, {
+        pauseOnHover: false
+      })
+    }
   }
 
   const handleBack = (e) =>{
@@ -79,7 +77,7 @@ export function SignUp() {
             <Label title="Senha"/>
             <Input 
               type="password" 
-              placeholder="No minimo 6 caracteres"
+              placeholder="No mínimo 8 caracteres"
               onChange = {(e) => setPassword(e.target.value)}
             />
           </InputWrapper>

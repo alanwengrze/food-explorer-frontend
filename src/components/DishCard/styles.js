@@ -39,7 +39,7 @@ export const Container = styled.div`
     border: none;
 
     > a{
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       font-weight: 700;
       white-space: nowrap;
 

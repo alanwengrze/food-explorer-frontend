@@ -17,8 +17,18 @@ export function Home(){
   const [search, setSearch] = useState('');
   const [dishes, setDishes] = useState([]);
   const [countCart, setCountCart] = useState(0);
+  const [dishesCount, setDishesCount] = useState(0);
+  const handleAddDishes = () => {
+    setDishesCount(prevState => prevState + 1);
+  }
+  const handleRemoveDishes = () => {
+    dishesCount > 0 &&
+    setDishesCount(prevState => prevState - 1);
+  }
 
   const navigate = useNavigate();
+
+
   const handleDish = (id) => {
     navigate(`/details/${id}`);
   }
@@ -88,7 +98,7 @@ export function Home(){
                 {
                   dishes.filter(dish => dish.category === "meal" ).map((dish, index) => (
                     <SwiperSlide key={index}>
-                      <DishCard
+                      <DishCard   
                         onEdit={() => handleEditDish(dish.id)}
                         onDetails={() => handleDish(dish.id)}
                         name={dish.name}
@@ -116,7 +126,7 @@ export function Home(){
                         image={`${api.defaults.baseURL}/files/${dish.image}`}
                         description={dish.description}
                         price={`R$ ${dish.price}`}
-
+         
                         onCart={handleAddToCart}
                       />
                     </SwiperSlide>

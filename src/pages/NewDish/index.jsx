@@ -18,6 +18,7 @@ import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
 
 import { useNavigate } from "react-router-dom";
+import { formatPrice } from "../../utils/format";
 
 export function NewDish() {
   const [ingredients, setIngredients] = useState([]);
@@ -26,15 +27,15 @@ export function NewDish() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
+  const [image, setImage] = useState(null);
 
   const navigate = useNavigate();
 
-  const handleImageChange = (e) => {
-    e.preventDefault();
+  const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    setImageFile(file);
+    setImage(file.name);
 
-    console.log(file);
+    console.log(image);
   }
 
   const handleAddIngredient = (e) => {
@@ -54,7 +55,9 @@ export function NewDish() {
 
   const handleAddDish = async (e) => {
     e.preventDefault();
-    
+
+    setPrice(Number(price).toFixed(2));
+
     if(!ingredients) {
       return toast.error("Não é possível adicionar pratos sem ingredientes");
     }
@@ -62,25 +65,25 @@ export function NewDish() {
       return toast.error("Você tem um ingrediente que não foi adicionado");
     }
     try {
-      await api.post("/dishes", {
-        name,
-        description,
-        price,
-        category,
-        ingredients
-      });
+      await toast.promise(
+        api.post("/dishes", {
+          name,
+          description,
+          price,
+          category,
+          ingredients,
+          image
+        }), {
+          pending: "Adicionando prato...",
+          success: "Prato adicionado com sucesso!",
+          error: "Ocorreu um erro ao adicionar o prato"
+        }
+      ) 
     } catch (error) {
       if(error.response) {
         return toast.error(error.response.data.message);
       }
     }
-
-    toast.success("Prato criado com sucesso!", 
-      {
-        position: "top-center",
-        autoClose: 1500,
-        pauseOnHover: false
-      });
 
     setTimeout(()=>{
       navigate("/");
@@ -90,7 +93,7 @@ export function NewDish() {
   const handleBack = (e) => {
     e.preventDefault();
 
-    navigate(-1);
+    navigate("/");
   }
   return (
     <Container>
@@ -130,7 +133,6 @@ export function NewDish() {
             <Label title="Categoria"/>
             <select 
               name="Categorias" 
-              id=""
               defaultValue="meal"
               onChange={e => setCategory(e.target.value)}
             >
@@ -167,8 +169,9 @@ export function NewDish() {
               <Label title="Preço"/>
               <Input
                 type="number" 
-                placeholder="R$ 00,00"
+                placeholder={`R$ 0,00`}
                 onChange={e => setPrice(e.target.value)}
+                value={price}
               />
             </InputWrapper>
           </div>

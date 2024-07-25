@@ -3,11 +3,12 @@ import { useAuth } from "../../hooks/auth";
 import { Container } from "./styles";
 import { AddDishes } from "../AddDishes";
 import { Button } from "../Button";
-import { FiHeart, FiEdit2, FiChevronRight } from 'react-icons/fi'
+import { FiEdit2, FiChevronRight } from 'react-icons/fi'
+import { FavoriteButton } from "../FavoriteButton";
 import { ButtonText } from '../ButtonText'
 
 
-export function DishCard({ name, image, description, price, dish, isAdmin = false, onDetails, onEdit, onCart,...rest }) {
+export function DishCard({ name, image, description, price, dish, isAdmin = false, isActive = false, onDetails, onEdit, onCart, onFav,...rest }) {
   const [dishesCount, setDishesCount] = useState(0);
 
   const { user } = useAuth();
@@ -20,12 +21,20 @@ export function DishCard({ name, image, description, price, dish, isAdmin = fals
     setDishesCount(prevState => prevState + 1);
   }
   const handleRemoveDishes = () => {
+    dishesCount > 0 &&
     setDishesCount(prevState => prevState - 1);
   }
 
+
   return (
     <Container {...rest}>
-      { isAdmin ? <FiEdit2 onClick={onEdit}/> : <FiHeart /> }
+      { isAdmin ? 
+      <FiEdit2 
+        onClick={onEdit}
+      /> : 
+      <FavoriteButton 
+        isActive={isActive}
+      /> }
       <img src={image} alt={name} />
       
       <button onClick={onDetails} className="btn-name">

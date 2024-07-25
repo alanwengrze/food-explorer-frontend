@@ -74,18 +74,23 @@ export function EditDish() {
       if(imageFile){
         const formData = new FormData();
         formData.append("image", imageFile);
-        const response = await api.patch(`/dishes/${params.id}/image`, formData);
-        console.log(response);
+        await api.patch(`/dishes/${params.id}/image`, formData);
       }
 
-      await api.put(`/dishes/${params.id}`, {
-        name,
-        description,
-        price,
-        category,
-        ingredients,
-        image: imageFile
-      });
+      await toast.promise(
+        api.put(`/dishes/${params.id}`, {
+          name,
+          description,
+          price,
+          category,
+          ingredients,
+          image: imageFile
+        }), {
+          pending: "Editando prato...",
+          success: "Prato editado com sucesso!",
+          error: "Ocorreu um erro ao editar o prato"
+        }
+      )
     } catch (error) {
       if(error.response) {
         toast.error(error.response.data.message);
@@ -93,11 +98,6 @@ export function EditDish() {
         toast.error("Não foi possível editar o prato");
       }
     }
-    toast.success("Prato editado com sucesso", {
-      position: "top-center",
-      autoClose: 1500,
-      pauseOnHover: false
-    });
 
     setTimeout(()=>{
       navigate("/");

@@ -10,7 +10,6 @@ import { Button } from '../../components/Button'
 import { ButtonText } from '../../components/ButtonText'
 
 import { motion } from 'framer-motion'
-import { toast } from "react-toastify";
 
 export function SignIn() {
   const [email, setEmail] = useState('');
@@ -19,6 +18,7 @@ export function SignIn() {
 
   const handleSignIn = (e) => {
     e.preventDefault();
+
     signIn({ email, password });
   }
 

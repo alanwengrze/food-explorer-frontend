@@ -31,6 +31,7 @@ export function Details({isAdmin }){
     setDishesCount(prevState => prevState + 1);
   }
   const handleRemoveDishes = () => {
+    dishesCount > 0 &&
     setDishesCount(prevState => prevState - 1);
   }
 

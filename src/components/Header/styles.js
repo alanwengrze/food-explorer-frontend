@@ -124,6 +124,7 @@ export const Menu = styled.div`
   }
 
   &[data-open-menu="true"] {
+    animation: menu 0.5s;
     display: grid;
     grid-template-rows: auto 1fr auto;
     grid-template-areas: 

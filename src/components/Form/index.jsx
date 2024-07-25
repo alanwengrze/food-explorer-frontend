@@ -1,7 +1,7 @@
 import { Container } from './styles'
 export function Form({ children }) {
   return(
-    <Container>
+    <Container onSubmit={(e) => e.preventDefault()}>
       {children}
     </Container>
   )
