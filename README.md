@@ -58,7 +58,7 @@ Para ter uma experiência completa, é necessário utilizar o backend da aplica�
 
 ## Deploy
 [Netlify](https://app.netlify.com/)
-Acesse ao deploy do [food-explorer](alnfoodexplorer.netlify.app/)
+Acesse ao deploy do [food-explorer](https://alnfoodexplorer.netlify.app/)
 
 ## Licença
 
