@@ -120,6 +120,10 @@ export const Menu = styled.div`
 
     > svg {
       font-size: 2rem;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 

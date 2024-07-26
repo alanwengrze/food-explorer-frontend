@@ -29,8 +29,8 @@ export const Container = styled.div`
     position: absolute;
     z-index: 20;
     background-color: ${({ theme }) => theme.DARK.D900};
-    width: 35rem;
-    height: 15rem;
+    width: 28rem;
+    height: 14rem;
     border-radius: 0.5rem;
     border: 1px solid ${({ theme }) => theme.LIGHT.L600};
     display: flex;
@@ -70,6 +70,11 @@ export const Container = styled.div`
         color: ${({ theme }) => theme.DARK.D900};
         
       }
+    }
+
+    @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {
+      width: 35rem;
+      height: 15rem;
     }
 
   }

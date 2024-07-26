@@ -26,15 +26,14 @@ export function NewDish() {
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [category, setCategory] = useState('');
-  const [image, setImage] = useState(null);
-
+  const [imageFile, setImageFile] = useState(null)
   const navigate = useNavigate();
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
-    setImage(file.name);
+    setImageFile(file);
 
-    console.log(image);
+    console.log(imageFile);
   }
 
   const handleAddIngredient = (e) => {
@@ -71,13 +70,13 @@ export function NewDish() {
           price,
           category,
           ingredients,
-          image
+          image: imageFile
         }), {
           pending: "Adicionando prato...",
           success: "Prato adicionado com sucesso!",
           error: "Ocorreu um erro ao adicionar o prato"
         }
-      ) 
+      )
     } catch (error) {
       if(error.response) {
         return toast.error(error.response.data.message);
