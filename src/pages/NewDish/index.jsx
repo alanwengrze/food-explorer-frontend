@@ -55,22 +55,36 @@ export function NewDish() {
     e.preventDefault();
 
     setPrice(Number(price).toFixed(2));
+   
 
-    if(!ingredients) {
+    console.log(category)
+
+    if(!name || !description || !price || !category) {
+      return toast.info("Por favor, preencha todos os campos");
+    }
+
+    if(ingredients.length === 0) {
       return toast.error("Não é possível adicionar pratos sem ingredientes");
     }
     if(newIngredient !== ""){
-      return toast.error("Você tem um ingrediente que não foi adicionado");
+      return toast.info("Você tem um ingrediente que não foi adicionado");
     }
+    const formData = new FormData();
+    
+    formData.append("image", imageFile);
+    formData.append("name", name);
+    formData.append("description", description);
+    formData.append("price", price);
+    formData.append("category", category);
+    formData.append('ingredients', JSON.stringify(ingredients));
     try {
       await toast.promise(
-        api.post("/dishes", {
-          name,
-          description,
-          price,
-          category,
-          ingredients,
-          image: imageFile
+        api.post("/dishes", 
+          formData,
+         {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
         }), {
           pending: "Adicionando prato...",
           success: "Prato adicionado com sucesso!",
@@ -109,11 +123,14 @@ export function NewDish() {
           icon={FiChevronLeft}
         />
         <h2>Adicionar prato</h2>
-        <Form >
+        <Form 
+          enctype="multipart/form-data"
+        >
           <div className="input-wrapper">
           <InputWrapper>
             <Label title="Imagem do prato"/>
             <Input 
+              name="image"
               type="file" 
               title="Selecione a imagem para alterá-la"
               icon={FiUpload}
@@ -169,7 +186,6 @@ export function NewDish() {
                 type="number" 
                 placeholder={`R$ 0,00`}
                 onChange={e => setPrice(e.target.value)}
-                value={price}
               />
             </InputWrapper>
           </div>
