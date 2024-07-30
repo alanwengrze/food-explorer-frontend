@@ -14,6 +14,7 @@ export const Container = styled.header`
     overflow-y: scroll;
     padding: 2rem;
 
+
     @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
       padding: 2rem 10rem;
     }

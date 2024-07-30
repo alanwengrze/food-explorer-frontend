@@ -52,10 +52,14 @@ export const Dish = styled.div`
   justify-content: center;
   gap: 2rem;
 
+  animation: fadeInLeft 1s ease-in-out;
+
   .img-wrapper{
     img {
       width: 24rem;
       height: 24rem;
+
+      border-radius: 50%;
     }
   }
 

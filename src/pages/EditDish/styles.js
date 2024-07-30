@@ -77,9 +77,10 @@ export const Container = styled.div`
 
       .button-wrapper{
         display: flex;
+        align-items: center;
         gap: 2rem;
 
-        button:first-child{
+        button:nth-child(2){
           background-color: ${({ theme }) => theme.DARK.D800};
         }
       }

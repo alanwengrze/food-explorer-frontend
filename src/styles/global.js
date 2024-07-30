@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import 'animate.css';
 
 export default createGlobalStyle`
   * {
@@ -55,5 +56,7 @@ export default createGlobalStyle`
       transform: translateX(0);
     }
   }
+
+  
 
 `;

@@ -11,8 +11,12 @@ export const Container = styled.div`
   border-radius: 0.8rem;
   background-color: ${({ theme }) => theme.DARK.D200};
 
-  
+  animation: fadeInUp 1s ease-in-out;
 
+  &:hover{
+    transform: scale(1.02) ;
+  }
+  
   > svg:first-child {
     position: absolute;
     top: 1rem;
@@ -27,8 +31,6 @@ export const Container = styled.div`
     }
   }
   
-
- 
   > img {
     width: 9rem;
     height: 9rem;
@@ -43,7 +45,6 @@ export const Container = styled.div`
     > a{
       font-size: 1.2rem;
       font-weight: 700;
-      white-space: nowrap;
 
       display: flex;
       flex-direction: row-reverse;
@@ -88,6 +89,8 @@ export const Container = styled.div`
 
   @media (min-width: ${({ theme }) => theme.SCREENS.SM}) {
 
+    transition: 0.5s;
+
     img{
       width: 12rem;
       height: 12rem;
@@ -105,10 +108,12 @@ export const Container = styled.div`
   }
 
   @media (min-width: ${({ theme }) => theme.SCREENS.MD}) {
-
     /* btn dish name */
-    > a{
-      font-size: 2rem;
+    .btn-name{
+      > a{
+        font-size: 2rem;
+        white-space: nowrap;
+      }
     }
 
     img{

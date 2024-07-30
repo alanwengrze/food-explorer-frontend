@@ -21,6 +21,9 @@ export const Container = styled.footer`
     img{
       height: 1.4rem;
     }
+    span{
+      display: none;
+    }
   }
 
   span{

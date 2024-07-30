@@ -17,14 +17,6 @@ export function Home(){
   const [search, setSearch] = useState('');
   const [dishes, setDishes] = useState([]);
   const [countCart, setCountCart] = useState(0);
-  const [dishesCount, setDishesCount] = useState(0);
-  const handleAddDishes = () => {
-    setDishesCount(prevState => prevState + 1);
-  }
-  const handleRemoveDishes = () => {
-    dishesCount > 0 &&
-    setDishesCount(prevState => prevState - 1);
-  }
 
   const navigate = useNavigate();
 
@@ -39,7 +31,6 @@ export function Home(){
 
   const handleAddToCart = () => {
     setCountCart(prevState => prevState + 1);
-    console.log(countCart);
   }
 
   useEffect(() => {
@@ -98,7 +89,8 @@ export function Home(){
                 {
                   dishes.filter(dish => dish.category === "meal" ).map((dish, index) => (
                     <SwiperSlide key={index}>
-                      <DishCard   
+                      <DishCard
+                        className="myElement"  
                         onEdit={() => handleEditDish(dish.id)}
                         onDetails={() => handleDish(dish.id)}
                         name={dish.name}

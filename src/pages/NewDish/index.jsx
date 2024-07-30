@@ -76,7 +76,7 @@ export function NewDish() {
     formData.append("description", description);
     formData.append("price", price);
     formData.append("category", category);
-    formData.append('ingredients', JSON.stringify(ingredients));
+    formData.append('ingredients', ingredients);
     try {
       await toast.promise(
         api.post("/dishes", 

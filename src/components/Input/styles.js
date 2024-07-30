@@ -7,7 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   background-color: ${({ theme }) => theme.DARK.D800};
   border-radius: 0.5rem;
-
+  
   > input {
     height: 4.5rem;
     width: 100%;

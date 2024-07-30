@@ -35,10 +35,6 @@ export function SlideDish({children}) {
               spaceBetween: 45
             },
 
-            800: {
-              slidesPerView: 3,
-            },
-
             1024: {
               slidesPerView: 3,
               spaceBetween: 30

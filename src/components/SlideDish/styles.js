@@ -12,6 +12,10 @@ html,
   
 }
 
+.swiper-wrapper{
+  overflow-y: hidden;
+}
+
 .swiper-slide {
   width: 100%;
   display: flex;
@@ -23,6 +27,7 @@ html,
 
 div.swiper-button-prev,
 div.swiper-button-next {
+  
    color: white;
    svg {
     font-size: 1rem;

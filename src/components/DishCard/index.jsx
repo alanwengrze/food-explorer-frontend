@@ -8,7 +8,7 @@ import { FavoriteButton } from "../FavoriteButton";
 import { ButtonText } from '../ButtonText'
 
 
-export function DishCard({ name, image, description, price, dish, isAdmin = false, isActive = false, onDetails, onEdit, onCart, onFav,...rest }) {
+export function DishCard({ name, image, description, price, dish, isAdmin = false, isActive = false, onDetails, onEdit, onCart,...rest }) {
   const [dishesCount, setDishesCount] = useState(0);
 
   const { user } = useAuth();
@@ -33,7 +33,7 @@ export function DishCard({ name, image, description, price, dish, isAdmin = fals
         onClick={onEdit}
       /> : 
       <FavoriteButton 
-        isActive={isActive}
+        
       /> }
       <img src={image} alt={name} />
       
